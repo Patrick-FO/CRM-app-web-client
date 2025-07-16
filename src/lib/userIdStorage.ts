@@ -1,8 +1,8 @@
 const USER_ID_KEY = 'userId'; 
 
 export const userIdStorage = {
-    set(token: string): void {
-        sessionStorage.setItem(USER_ID_KEY, token); 
+    set(userId: string): void {
+        sessionStorage.setItem(USER_ID_KEY, userId); 
     }, 
 
     get(): string | null {

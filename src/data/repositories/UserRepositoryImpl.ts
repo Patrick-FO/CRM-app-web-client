@@ -15,15 +15,8 @@ export class UserRepositoryImpl implements UserRepository {
         }
     }
 
-    async loginUser(username: string, password: string): Promise<boolean> {
-        try {
-            const { token, userId } = await userEndpoints.getJwtToken({ username, password }); 
-            tokenStorage.set(token); 
-            userIdStorage.set(userId); 
-            return true;
-        } catch (error) {
-            console.error('Login failed:', error)
-            return false; 
-        }
+    //Improve error handling? 
+    async loginUser(username: string, password: string): Promise<{ token: string, userId: string }> {
+        return await userEndpoints.getJwtToken({ username, password });
     }
 }

@@ -12,10 +12,12 @@ export const userEndpoints = {
         console.log('Making request to:', `${process.env.NEXT_PUBLIC_API_URL}/auth`);
         console.log('Request data:', userData);
         
-        const response = await apiClient.post('/auth', userData)
+        const response = await apiClient.post<JwtResponse>('/auth', userData);
+        console.log(`Headers: ${response.headers}`);
+        console.log(`The user ID we get from API: ${response.headers['userid']}`);
         return {
             token: response.data.token, 
-            userId: response.headers['userId']
+            userId: response.headers['userid']
         }
     }
 }

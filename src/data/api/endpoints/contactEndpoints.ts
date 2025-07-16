@@ -9,6 +9,7 @@ export const contactEndpoints = {
         const userId = userIdStorage.get(); 
         if(!userId) throw new Error('User not logged in');
 
+        console.log(`Making request to /users/${userId}/contacts`);
         const response = await apiClient.get(`/users/${userId}/contacts`); 
         return response.data;
     },

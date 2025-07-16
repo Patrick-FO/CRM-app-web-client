@@ -7,5 +7,5 @@ export interface UserRepository {
     loginUser(
         username: string, 
         password: string
-    ): Promise<boolean>; 
+    ): Promise<{ token: string, userId: string }>; 
 }
