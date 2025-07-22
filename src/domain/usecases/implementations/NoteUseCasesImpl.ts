@@ -94,7 +94,7 @@ export class EditNoteUseCaseImpl implements EditNoteUseCase {
 
 @injectable()
 export class DeleteNoteUseCaseImpl implements DeleteNoteUseCase {
-    constructor(@inject(TOKENS.DeleteNoteUseCase) private noteRepository: NoteRepository) {}
+    constructor(@inject(TOKENS.NoteRepository) private noteRepository: NoteRepository) {}
 
     async execute(
         noteId: number

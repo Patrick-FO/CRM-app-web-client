@@ -42,7 +42,7 @@ export const contactEndpoints = {
         const userId = userIdStorage.get(); 
         if(!userId) throw new Error('User not logged in');
         
-        const response = await apiClient.put(`/users/${userId}/contacts/${contactId}`);
+        const response = await apiClient.delete(`/users/${userId}/contacts/${contactId}`);
         return response.data;
     }
 }
