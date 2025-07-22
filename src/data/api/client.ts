@@ -5,7 +5,7 @@ import { tokenStorage } from '../../lib/tokenStorage';
 console.log('API Base URL:', process.env.NEXT_PUBLIC_API_URL);
 
 const apiClient: AxiosInstance = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8082/api', 
+    baseURL: process.env.NEXT_PUBLIC_API_URL, 
     timeout: 10000, 
     headers: {
         'Content-Type': 'application/json'

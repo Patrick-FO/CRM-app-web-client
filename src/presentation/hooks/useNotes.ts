@@ -37,7 +37,8 @@ export function useNotes(contactId: number | null) {
     try {
       const useCase = container.resolve<CreateNoteUseCase>(TOKENS.CreateNoteUseCase);
       const newNote = await useCase.execute(contactIds, title, description);
-      setNotes([...notes, newNote]);
+      //setNotes([...notes, newNote]);
+      loadNotes();
       return true;
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to create note');
