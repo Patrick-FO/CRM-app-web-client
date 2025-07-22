@@ -37,7 +37,6 @@ export function useNotes(contactId: number | null) {
     try {
       const useCase = container.resolve<CreateNoteUseCase>(TOKENS.CreateNoteUseCase);
       const newNote = await useCase.execute(contactIds, title, description);
-      //setNotes([...notes, newNote]);
       loadNotes();
       return true;
     } catch (err) {
