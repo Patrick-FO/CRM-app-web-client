@@ -54,10 +54,16 @@ export function useAI() {
         }
     };
 
+    const clearMessages = () => {
+        setMessages([]); 
+        setError(''); 
+    }
+
     return {
         messages, 
         loading, 
         error, 
-        sendPrompt
+        sendPrompt, 
+        clearMessages
     }
 }
