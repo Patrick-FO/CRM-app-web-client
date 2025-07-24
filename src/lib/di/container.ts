@@ -6,6 +6,7 @@ export const TOKENS = {
     UserRepository: 'UserRepository', 
     ContactRepository: 'ContactRepository', 
     NoteRepository: 'NoteRepository',
+    AIRepository: 'AIRepository',
 
     //User use cases
     LoginUserUseCase: 'LoginUserUseCase', 
@@ -24,7 +25,10 @@ export const TOKENS = {
     GetNoteByIdUseCase: 'GetNoteByIdUseCase', 
     CreateNoteUseCase: 'CreateNoteUseCase', 
     EditNoteUseCase: 'EditNoteUseCase', 
-    DeleteNoteUseCase: 'DeleteNoteUseCase'
+    DeleteNoteUseCase: 'DeleteNoteUseCase',
+
+    //AI use cases
+    GetAIQueryUseCase: 'GetAIQueryUseCase'
 } as const; 
 
 export { container }; 

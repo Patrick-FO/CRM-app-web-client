@@ -5,6 +5,8 @@ import { NoteRepository } from '@/domain/repositories/NoteRepository';
 import { UserRepositoryImpl } from '@/data/repositories/UserRepositoryImpl';
 import { ContactRepositoryImpl } from '@/data/repositories/ContactRepositoryImpl';
 import { NoteRepositoryImpl } from '@/data/repositories/NoteRepositoryImpl';
+import { AIRepository } from '@/domain/repositories/AiRepository';
+import { AIRepositoryImpl } from '@/data/repositories/AIRepositoryImpl';
 
 export function setupRepositories() {
     container.register<UserRepository>(TOKENS.UserRepository, {
@@ -17,5 +19,9 @@ export function setupRepositories() {
 
     container.register<NoteRepository>(TOKENS.NoteRepository, {
         useClass: NoteRepositoryImpl
+    }); 
+
+    container.register<AIRepository>(TOKENS.AIRepository, {
+        useClass: AIRepositoryImpl
     }); 
 }

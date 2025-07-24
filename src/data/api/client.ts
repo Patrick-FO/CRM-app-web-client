@@ -1,5 +1,4 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
-import { config } from 'process';
 import { tokenStorage } from '../../lib/tokenStorage';
 
 console.log('API Base URL:', process.env.NEXT_PUBLIC_API_URL);
