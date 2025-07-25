@@ -6,7 +6,8 @@ import { ContactsColumn } from './ContactsColumn';
 import { NotesColumn } from './NotesColumn';
 import { ContactEditSheet } from './ContactEditSheet';
 import { NoteEditSheet } from './NoteEditSheet';
-import { DeleteDialog } from './DeleteDialog'; 
+import { DeleteDialog } from './DeleteDialog';
+import { AIChatFloating } from './AIChatFloating';
 import { useContacts } from '@/presentation/hooks/useContacts';
 import { useNotes } from '@/presentation/hooks/useNotes';
 import { useLogout } from '@/presentation/hooks/useLogout';
@@ -44,6 +45,9 @@ export default function DashboardPage() {
     item: Contact | Note | null;
   }>({ open: false, type: 'contact', item: null });
 
+  // Check if any modal/sheet is open (to disable AI chat)
+  const hasOpenModal = editContactSheet || editNoteSheet || deleteDialog.open;
+
   // Event handlers
   const handleEditContact = (contact: Contact) => {
     setEditingContact(contact);
@@ -78,32 +82,32 @@ export default function DashboardPage() {
   };
 
   const handleEditNote = (note: Note) => {
-  setEditingNote(note);
-  setNoteForm({
-    title: note.title,
-    description: note.description || ''
-  });
-  setEditNoteSheet(true);
-};
+    setEditingNote(note);
+    setNoteForm({
+      title: note.title,
+      description: note.description || ''
+    });
+    setEditNoteSheet(true);
+  };
 
   const handleCreateNote = () => {
-  setEditingNote(null);
-  setNoteForm({
-    title: '',
-    description: ''
-  });
-  setEditNoteSheet(true);
-};
+    setEditingNote(null);
+    setNoteForm({
+      title: '',
+      description: ''
+    });
+    setEditNoteSheet(true);
+  };
 
   const handleSaveNote = async (selectedContactIds: number[]) => {
-  const success = editingNote
-    ? await editNote(editingNote.id, selectedContactIds, noteForm.title, noteForm.description)
-    : await createNote(selectedContactIds, noteForm.title, noteForm.description);
-  
-  if (success) {
-    setEditNoteSheet(false);
-  }
-};
+    const success = editingNote
+      ? await editNote(editingNote.id, selectedContactIds, noteForm.title, noteForm.description)
+      : await createNote(selectedContactIds, noteForm.title, noteForm.description);
+    
+    if (success) {
+      setEditNoteSheet(false);
+    }
+  };
 
   const handleDeleteClick = (type: 'contact' | 'note', item: Contact | Note) => {
     setDeleteDialog({ open: true, type, item });
@@ -154,6 +158,7 @@ export default function DashboardPage() {
         )}
       </div>
 
+      {/* Existing Sheets and Dialogs */}
       <ContactEditSheet
         open={editContactSheet}
         onOpenChange={setEditContactSheet}
@@ -164,15 +169,15 @@ export default function DashboardPage() {
       />
 
       <NoteEditSheet
-  open={editNoteSheet}
-  onOpenChange={setEditNoteSheet}
-  editingNote={editingNote}
-  noteForm={noteForm}
-  onNoteFormChange={setNoteForm}
-  onSave={handleSaveNote}
-  contacts={contacts} // Pass all contacts
-  preselectedContactIds={editingNote ? editingNote.contactIds : []} 
-/>
+        open={editNoteSheet}
+        onOpenChange={setEditNoteSheet}
+        editingNote={editingNote}
+        noteForm={noteForm}
+        onNoteFormChange={setNoteForm}
+        onSave={handleSaveNote}
+        contacts={contacts}
+        preselectedContactIds={editingNote ? editingNote.contactIds : []} 
+      />
 
       <DeleteDialog
         open={deleteDialog.open}
@@ -180,6 +185,9 @@ export default function DashboardPage() {
         onOpenChange={(open) => setDeleteDialog({...deleteDialog, open})}
         onConfirm={handleDeleteConfirm}
       />
+
+      {/* AI Chat - Disabled when any modal/sheet is open */}
+      <AIChatFloating disabled={hasOpenModal} />
     </div>
   );
 }
