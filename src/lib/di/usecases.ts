@@ -5,8 +5,8 @@ import { CreateContactUseCase, DeleteContactUseCase, EditContactUseCase, GetAllC
 import { CreateContactUseCaseImpl, DeleteContactUseCaseImpl, EditContactUseCaseImpl, GetAllContactsUseCaseImpl, GetContactByIdUseCaseImpl } from '@/domain/usecases/implementations/ContactUseCasesImpl';
 import { CreateNoteUseCase, DeleteNoteUseCase, EditNoteUseCase, GetNoteByIdUseCase, GetNotesForContactUseCase } from '@/domain/usecases/interfaces/NoteUseCases';
 import { CreateNoteUseCaseImpl, DeleteNoteUseCaseImpl, EditNoteUseCaseImpl, GetNoteByIdUseCaseImpl, GetNotesForContactUseCaseImpl } from '@/domain/usecases/implementations/NoteUseCasesImpl';
-import { GetAIQueryUseCase } from '@/domain/usecases/interfaces/AIUseCases';
-import { GetAIQueryUseCaseImpl } from '@/domain/usecases/implementations/AIUseCasesImpl';
+import { GetAIQueryStreamUseCase, GetAIQueryUseCase } from '@/domain/usecases/interfaces/AIUseCases';
+import { GetAIQueryStreamUseCaseImpl, GetAIQueryUseCaseImpl } from '@/domain/usecases/implementations/AIUseCasesImpl';
 
 export function setupUseCases() {
     //User use cases
@@ -71,4 +71,8 @@ export function setupUseCases() {
     container.register<GetAIQueryUseCase>(TOKENS.GetAIQueryUseCase, {
         useClass: GetAIQueryUseCaseImpl
     });
+
+    container.register<GetAIQueryStreamUseCase>(TOKENS.GetAIQueryStreamUseCase, {
+        useClass: GetAIQueryStreamUseCaseImpl
+    })
 }

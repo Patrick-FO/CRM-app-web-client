@@ -28,7 +28,8 @@ export const TOKENS = {
     DeleteNoteUseCase: 'DeleteNoteUseCase',
 
     //AI use cases
-    GetAIQueryUseCase: 'GetAIQueryUseCase'
+    GetAIQueryUseCase: 'GetAIQueryUseCase',
+    GetAIQueryStreamUseCase: 'GetAIQueryStreamUseCase',
 } as const; 
 
 export { container }; 

@@ -10,4 +10,15 @@ export class AIRepositoryImpl implements AIRepository {
         const response = await aiEndpoints.aiRequest(query); 
         return AIQueryMapper.toDomain(response);
     }
+
+    async getAiQueryStream(
+    query: string, 
+    onToken: (token: string) => void, 
+    onComplete: (fullResponse: string) => void, 
+    onError: (error: string) => void
+  ): Promise<void> {
+    const response = await aiEndpoints.aiRequestStream(query, onToken, onComplete, onError);
+    console.log(`From repository: ${response}`);
+    return response;
+  }
 }
